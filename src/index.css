@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+  /* Mencegah layar berkedip putih saat direfresh */
+  background-color: #020617; 
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  overflow-x: hidden;
+  background-color: #020617; /* slate-950 */
+  color: #f8fafc; /* slate-50 */
+}
+
+/* =========================================
+   CUSTOM SCROLLBAR (TAMPILAN MODERN)
+========================================= */
+
+/* Lebar scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* Background jalur scrollbar */
+::-webkit-scrollbar-track {
+  background: #020617; 
+}
+
+/* Warna batang scrollbar (Default) */
+::-webkit-scrollbar-thumb {
+  background: #1e293b; /* slate-800 */
+  border-radius: 10px;
+}
+
+/* Warna batang scrollbar saat di-hover (Fuchsia Aesthetic) */
+::-webkit-scrollbar-thumb:hover {
+  background: #d946ef; 
+}
