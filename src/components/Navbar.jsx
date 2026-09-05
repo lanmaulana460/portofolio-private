@@ -48,8 +48,8 @@ const Navbar = () => {
       transition={{ duration: 0.5 }}
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
         scrolled
-          ? 'bg-slate-950/80 backdrop-blur-md border-b border-slate-800/80 shadow-lg py-3'
-          : 'bg-transparent py-5'
+          ? 'bg-slate-950/90 backdrop-blur-md border-b border-slate-800/80 shadow-lg py-3'
+          : 'bg-slate-950/50 backdrop-blur-sm py-5'
       }`}
     >
       <div className="max-w-6xl mx-auto px-6 flex items-center justify-between">
@@ -88,35 +88,38 @@ const Navbar = () => {
           })}
         </div>
 
-        {/* MOBILE MENU BUTTON ONLY */}
+        {/* MOBILE MENU BUTTON */}
         <div className="flex items-center gap-3">
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-300 transition-all"
+            className="md:hidden p-2 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-300 transition-all z-50 relative"
+            aria-label="Toggle Menu"
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
       </div>
 
-      {/* MOBILE DRAWER MENU */}
+      {/* MOBILE DRAWER MENU (Diperbaiki z-index dan interaksinya) */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-slate-950 border-b border-slate-800 px-6 py-4 overflow-hidden"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.2 }}
+            className="absolute top-full left-0 right-0 md:hidden bg-slate-950/95 backdrop-blur-xl border-b border-slate-800 px-6 py-6 shadow-2xl z-40"
           >
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-4">
               {navItems.map((item) => (
                 <a
                   key={item.name}
                   href={item.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="text-sm font-medium text-slate-400 hover:text-sky-400 transition-colors"
+                  onClick={() => setMobileMenuOpen(false)} // Menu otomatis tertutup saat diklik
+                  className="text-base font-semibold text-slate-300 hover:text-sky-400 transition-colors py-1 border-b border-slate-900/50 flex items-center justify-between"
                 >
-                  {item.name}
+                  <span>{item.name}</span>
+                  <span className="text-xs font-mono text-slate-600">{item.href}</span>
                 </a>
               ))}
             </div>
@@ -126,5 +129,4 @@ const Navbar = () => {
     </motion.nav>
   );
 };
-
 export default Navbar;
