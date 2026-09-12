@@ -10,4 +10,5 @@ export const projectsData = [
     status: "Completed",
     github: "https://github.com/Lanmaulana",
     demo: "https://web-sederhana-production-9b25.up.railway.app",
-  }
+  },
+  ];
